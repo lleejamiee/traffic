@@ -8,11 +8,13 @@ import time
 from ultralytics import YOLO
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 
 class VideoPlayer:
     percentage_output = ""
     file_name = ""
+    video_name = ""
 
     def __init__(self, root):
         self.root = root
@@ -95,6 +97,8 @@ class VideoPlayer:
 
     def load_video(self):
         video_path = filedialog.askopenfilename(filetypes=[("Video files", "*.*")])
+        self.video_name = os.path.basename(video_path)
+
         if video_path:
             self.cap = cv2.VideoCapture(video_path)
             self.running = True
@@ -181,9 +185,9 @@ class VideoPlayer:
     def stop_and_reset(self):
         self.running = False
 
-        file_name = self.file_name
-        print("save to" + file_name)
-        text_file = open(self.file_name, "w")
+        file_name = self.video_name + "_" + self.file_name
+        print("save to " + file_name)
+        text_file = open(file_name, "w")
         text_file.write(self.percentage_output)
         text_file.close()
         self.percentage_output = ""
