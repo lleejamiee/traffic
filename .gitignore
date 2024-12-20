@@ -1,1 +1,8 @@
 .idea
+*.mkv
+*.webm
+*.pt
+*.tar.gz
+*.whl
+*.txt
+.DS_Store
